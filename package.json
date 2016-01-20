@@ -1,0 +1,32 @@
+{
+  "name": "pager",
+  "version": "0.1.0",
+  "description": "JavaScript rule engine without the fuss",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yamsellem/pager.git"
+  },
+  "keywords": [
+    "rule",
+    "engine"
+  ],
+  "author": "amsellem.yves@gmail.com",
+  "homepage": "https://github.com/yamsellem/pager",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yamsellem/pager/issues"
+  },
+  "scripts": {
+      "test": "mocha ./test"
+  },
+  "dependencies": {
+    "moment": "2.11.1",
+    "lodash": "4.0.0",
+    "bluebird": "3.1.1"
+  },
+  "devDependencies": {
+    "chai": "x",
+    "sinon": "x"
+  }
+}
