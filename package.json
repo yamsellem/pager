@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "chai": "x",
+    "chai-datetime": "x",
     "sinon": "x"
   }
 }
