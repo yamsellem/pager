@@ -38,6 +38,7 @@ describe('flow', function() {
                 event: 'yellow:submarine',
                 context: {id: 1},
                 date: new Date(),
+                dedup: null,
                 flag: null
             });
 
@@ -301,6 +302,35 @@ describe('flow', function() {
             sinon.assert.called(secondFire);
             sinon.assert.calledWith(firstFire, task.context, {options: 'set'});
             sinon.assert.calledWith(secondFire, task.context, {options: 'set'});
+
+            done();
+        }).catch(done);
+    });
+
+    it('should dedup task', function(done) {
+        var flow = new Flow({options: 'set'}),
+            emit = sinon.spy(flow, 'emit'),
+            rule = new Rule({match: function() { return false; }}),
+            match = sinon.spy(rule, 'match');
+
+        flow.subscribe('yellow:submarine')
+            .channel('emerge')
+            .dedup(function(context) {
+                return context.id;
+            })
+            .after(5)
+            .comply(rule);
+
+        flow.message('yellow:submarine', {id: 1}).then(function() {
+            sinon.assert.calledOnce(emit);
+            sinon.assert.calledWith(emit, 'acknowledge', {
+                channel: 'emerge',
+                event: 'yellow:submarine',
+                context: {id: 1},
+                dedup: 1,
+                date: moment().add(5, 'seconds').toDate(),
+                flag: null
+            });
 
             done();
         }).catch(done);

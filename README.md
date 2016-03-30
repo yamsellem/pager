@@ -244,6 +244,14 @@ channel.then(middleware, ...)
 
 [_Initializing_] Declare a function that will be invoked for the given context and can update it (_ex. add a value for further usage_). Can be chained.
 
+##### dedup
+
+```javascript
+channel.dedup(function(context) { return ...})
+```
+
+[_Initializing_] Declare a function that will be invoked for the given context and will add a `dedup` attribute to each returned task. This help to spot different tasks that should be considered similar — and avoid doing twice an action that don't need to. Can be chained.
+
 ##### channel
 
 ```javascript
